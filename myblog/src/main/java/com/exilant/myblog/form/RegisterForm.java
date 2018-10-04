@@ -1,8 +1,5 @@
 package com.exilant.myblog.form;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-
 public class RegisterForm {
 
 	

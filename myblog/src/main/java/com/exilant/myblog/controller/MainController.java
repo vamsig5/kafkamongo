@@ -68,31 +68,32 @@ public class MainController {
 	 @RequestMapping(value = "/register", method = RequestMethod.GET)
 	   public String viewRegister(Model model) {
 	 
-	      RegisterForm form = new RegisterForm();
+	      RegisterForm registerForm = new RegisterForm();
 	      List<Country> countries = country.allCountries();
 	 
-	      model.addAttribute("form", form);
+	      model.addAttribute("form", registerForm);
 	      model.addAttribute("countries", countries);
 	 
-	      return "register";
+	      return "registerPage";
 	   }
 	
 	
 	 @RequestMapping(value = "/register", method = RequestMethod.POST)
 	   public String saveRegister(Model model, 
-	         @ModelAttribute("form") @Validated RegisterForm form, 
+	         @ModelAttribute("registerForm") @Validated RegisterForm registerForm, 
 	         BindingResult result, 
 	         final RedirectAttributes redirectAttributes) {
-	 User user=new User();
-	  model.addAttribute(form);
+		 //model.addAttribute(registerForm);
+	 User user=null;
+	  
 	      if (result.hasErrors()) {
 	         List<Country> countries = country.allCountries();
 	         model.addAttribute("countries", countries);
-	         return "register";
+	         return "registerPage";
 	      }
 	      
 	      try {
-	         user = usService.saveUser(form);
+	         user = usService.saveUser(registerForm);
 	         
 	      }
 	     
@@ -100,7 +101,7 @@ public class MainController {
 	         List<Country> countries = country.allCountries();
 	         model.addAttribute("countries", countries);
 	         model.addAttribute("errorMessage", "Error: " + e.getMessage());
-	         return "register";
+	         return "registerPage";
 	      }
 	     
 	      redirectAttributes.addFlashAttribute("flashUser", user);

@@ -7,11 +7,11 @@
 <body>
 <th:block th:include="/home"></th:block>
 <h2>Registration Form</h2>
-<div th:if="${errorMessage!=null}" th:utext="${errorMessage}" class="error"></div>
-<form action="@{/register}" th:object="${form}" method="POST" ></form>
+<div th:if="${errorMessage!=null}" th:utext="${errorMessage}" class="Error"></div>
+<form action="@{/register}" th:object="${registerForm}" method="POST"></form>
 <table>
 <tr><td>UserName</td>
-    <td><input type="text" th:field="*{userName}"/></td>
+      <td><input type="text" th:field="*{userName}"/></td>
      <td><span th:if="${#fields.hasErrors('userName')}" th:errors="{userName}"></span></td></tr>
 <tr> <td>Password</td>
      <td><input type="password" th:field="*{password}" /> </td>

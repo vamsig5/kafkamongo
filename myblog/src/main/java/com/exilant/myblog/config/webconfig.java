@@ -33,8 +33,12 @@ public class webconfig implements WebMvcConfigurer{
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
 	        resolver.setPrefix("/templates/");
         resolver.setSuffix(".html");
+        resolver.setViewNames(new String[] {".html", ".xhtml"});
+        
 	        //resolver.setViewClass(JstlView.class);
         registry.viewResolver(resolver);
+        
+        
 	    }
 	 
 	  @Override

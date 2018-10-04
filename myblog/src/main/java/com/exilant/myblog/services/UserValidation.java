@@ -1,6 +1,7 @@
 package com.exilant.myblog.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -9,7 +10,7 @@ import org.springframework.validation.Validator;
 import com.exilant.myblog.dao.UserRepository;
 import com.exilant.myblog.form.RegisterForm;
 import com.exilant.myblog.model.User;
-@Service
+@Component
 public class UserValidation implements Validator {
 
 	 //common-validator library.
@@ -26,16 +27,16 @@ public class UserValidation implements Validator {
 	 
 	    @Override
 	    public void validate(Object target, Errors errors) {
-	    	RegisterForm Form = (RegisterForm) target;
+	    	RegisterForm registerForm = (RegisterForm) target;
 	 
 	        // Check the fields of AppUserForm.
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty.RegisterForm.userName");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.RegisterForm.firstName");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.RegisterForm.email");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.RegisterForm.password");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.RegisterForm.confirmPassword");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.RegisterForm.gender");
-	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countryCode", "NotEmpty.RegisterForm.countryCode");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "userName", "NotEmpty.registerForm.userName");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "firstName", "NotEmpty.registerForm.firstName");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty.registerForm.email");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty.registerForm.password");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "confirmPassword", "NotEmpty.registerForm.confirmPassword");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "gender", "NotEmpty.registerForm.gender");
+	        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "countryCode", "NotEmpty.registerForm.countryCode");
 	 
 //	        if (!this.emailValidator.isValid(appUserForm.getEmail())) {
 //	            // Invalid email.
@@ -49,18 +50,18 @@ public class UserValidation implements Validator {
 //	        }
 	 
 	        if (!errors.hasFieldErrors("userName")) {
-	            User dbUser = userrepo.UserByName(Form.getUserName());
+	            User dbUser = userrepo.UserByName(registerForm.getUserName());
 	            if (dbUser != null) {
 	                
-	                errors.rejectValue("userName", "Duplicate.RegisterForm.userName");
+	                errors.rejectValue("userName", "Duplicate.Form.userName");
 	            }
 	        }
-	 
-	        if (!errors.hasErrors()) {
-	            if (!Form.getConfirmPassword().equals(Form.getPassword())) {
-	                errors.rejectValue("confirmPassword", "Match.RegisterForm.confirmPassword");
-	            }
-	        }
+//	 
+//	        if (!errors.hasErrors()) {
+//	            if (!Form.getConfirmPassword().equals(Form.getPassword())) {
+//	                errors.rejectValue("confirmPassword", "Match.RegisterForm.confirmPassword");
+//	            }
+//	        }
 	    }
 
 }
